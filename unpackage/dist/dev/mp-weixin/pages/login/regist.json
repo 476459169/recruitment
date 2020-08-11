@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "注册",
+  "usingComponents": {
+    "lb-picker": "/components/lb-picker/index"
+  }
+}

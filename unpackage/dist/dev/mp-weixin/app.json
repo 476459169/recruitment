@@ -1,6 +1,16 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/home/home",
+    "pages/login/login",
+    "pages/mine/mine",
+    "pages/login/regist",
+    "pages/login/forgetPwd",
+    "pages/home/screening",
+    "pages/home/openPositions",
+    "pages/communication/communication",
+    "pages/mine/jobmanage",
+    "pages/mine/cvmanage",
+    "pages/home/cvdetail"
   ],
   "subPackages": [],
   "window": {
@@ -9,6 +19,29 @@
     "navigationBarBackgroundColor": "#007AFF",
     "backgroundColor": "#FFFFFF"
   },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#ca5a30",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "iconPath": "static/home_g.png",
+        "selectedIconPath": "static/home_o.png"
+      },
+      {
+        "pagePath": "pages/communication/communication",
+        "iconPath": "static/communication_g.png",
+        "selectedIconPath": "static/communication_o.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "iconPath": "static/mine_g.png",
+        "selectedIconPath": "static/mine_o.png"
+      }
+    ]
+  },
   "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap75.json"
 }

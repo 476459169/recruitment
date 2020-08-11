@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "发布职位",
+  "usingComponents": {
+    "lb-picker": "/components/lb-picker/index"
+  }
+}
