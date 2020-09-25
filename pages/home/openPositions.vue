@@ -17,7 +17,7 @@
 		<view class="titleLabel">经验要求</view>
 		<view class="input_text" @tap="handleTap('picker12')">
 			<view class="input_text_content">
-				{{year.length>0?year:'经验要求'}}
+				{{year.length>0?year:''}}
 			</view>
 			<view class="input_text_imgView">
 					<image class="input_text_imgView_img" src="../../static/login/star3.png" mode=""></image>
@@ -30,7 +30,7 @@
 		<view class="titleLabel">学历要求</view>
 		<view class="input_text" @tap="handleTap('picker13')">
 			<view class="input_text_content">
-				{{xl.length>0?xl:'学历要求'}}
+				{{xl.length>0?xl:''}}
 			</view>
 			<view class="input_text_imgView">
 					<image class="input_text_imgView_img" src="../../static/login/star3.png" mode=""></image>
@@ -42,7 +42,7 @@
 		<view class="titleLabel">职位月薪</view>
 		<view class="input_text" @tap="handleTap('picker113')">
 			<view class="input_text_content">
-				{{money.length>0?money:'学历要求'}}
+				{{money.length>0?money:''}}
 			</view>
 			<view class="input_text_imgView">
 					<image class="input_text_imgView_img" src="../../static/login/star3.png" mode=""></image>
