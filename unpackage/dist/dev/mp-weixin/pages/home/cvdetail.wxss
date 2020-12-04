@@ -69,12 +69,18 @@
 .top_view .top_view_t .top_view_t_leftview .top_view_t_leftview_titleview .top_view_t_leftview_titleview_img {
   width: 10px;
   height: 10px;
-  border-radius: 5px;
-  background-color: #000000;
+  margin-left: 5px;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
+  margin-top: 3px;
 }
 .top_view .top_view_t .top_view_t_leftview .top_view_t_leftview_titleview .top_view_t_leftview_titleview_mes {
   font-size: 10px;
+  margin-left: 5px;
   color: #666666;
+  line-height: 20px;
+  height: 20px;
+  margin-top: 5px;
 }
 .top_view .top_view_t .top_view_t_leftview .top_view_t_leftview_detailmsg {
   font-size: 12px;
@@ -85,7 +91,8 @@
 .top_view .top_view_t .top_view_t_rightview {
   width: 40px;
   height: 40px;
-  border-radius: 25px;
+  -webkit-border-radius: 25px;
+          border-radius: 25px;
   background-color: #000000;
 }
 .top_view .top_view_b {
@@ -157,27 +164,140 @@
   width: 20px;
   height: 20px;
   background-color: #FF0000;
-  border-radius: 10px;
+  -webkit-border-radius: 10px;
+          border-radius: 10px;
 }
 .work_experience .work_experience_item .work_experience_item_content {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
           flex: 1;
   padding: 10px;
+  font-size: 12px;
 }
 .work_experience .work_experience_item .work_experience_item_content .work_experience_item_content_blackText {
   line-height: 20px;
   color: #666666;
+  font-size: 12px;
 }
 .work_experience .work_experience_item .work_experience_item_content .work_experience_item_content_garytext {
   line-height: 20px;
   color: #b3b3b3;
+  font-size: 12px;
 }
 .bottom_btn {
   background-color: #e8654b;
   color: #FFFFFF;
   font-size: 15px;
-  border-radius: 5px;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
   margin: 30px;
+}
+.bottom_btns {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  margin: 30px 0px;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.bottom_btns .bottom_btns_btn {
+  margin: 0px 10px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  border: 1px solid #e8654b;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
+  background-color: #fddfd6;
+  color: #e8654b;
+  font-size: 14px;
+  text-align: center;
+  line-height: 25px;
+  height: 25px;
+}
+.bottom_btns .bottom_btns_btn_callme {
+  margin: 0px 10px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  border: 1px solid #e8654b;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
+  background-color: #e8654b;
+  color: #FFFFFF;
+  font-size: 14px;
+  text-align: center;
+  line-height: 25px;
+  height: 25px;
+}
+.popView_items {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  padding: 5px 10px;
+}
+.popView_items .popView_items_title {
+  font-size: 14px;
+  color: #333333;
+  line-height: 25px;
+  height: 25px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+.popView_items .popView_items_content {
+  font-size: 14px;
+  color: #666666;
+  line-height: 25px;
+  height: 25px;
+}
+.potitle {
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  color: #000000;
+  height: 30px;
+  line-height: 30px;
+}
+.popbtns {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.popbtns .popbtn_item_left {
+  margin: 0px 10px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  border: 1px solid #e8654b;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
+  background-color: #fddfd6;
+  color: #e8654b;
+  font-size: 14px;
+  text-align: center;
+  line-height: 25px;
+}
+.popbtns .popbtn_item_right {
+  margin: 0px 10px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  border: 1px solid #e8654b;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
+  background-color: #e8654b;
+  color: #FFFFFF;
+  font-size: 14px;
+  text-align: center;
+  line-height: 25px;
+  height: 25px;
 }
 

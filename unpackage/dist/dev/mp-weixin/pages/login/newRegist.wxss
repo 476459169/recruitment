@@ -1,0 +1,160 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.top_image {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 50%;
+  background-color: #e8654b;
+}
+.title {
+  position: relative;
+  width: 100%;
+  font-size: 22px;
+  color: #FFFFFF;
+  text-align: center;
+  margin-top: 80px;
+  z-index: 1;
+}
+.main_view {
+  position: relative;
+  margin-top: 20px;
+  margin-left: 5%;
+  margin-right: 5%;
+  background-color: #FFFFFF;
+  -webkit-box-shadow: 0px 0px 3px #666;
+          box-shadow: 0px 0px 3px #666;
+  -webkit-border-radius: 20px;
+          border-radius: 20px;
+  padding: 20px 20px;
+}
+.main_view .lab {
+  padding: 10px 0px 0px 30px;
+  color: #666666;
+  font-size: 14px;
+  width: 100%;
+  line-height: 30px;
+}
+.main_view .lab_pwd {
+  padding: 0px 0px 0px 30px;
+  color: #666666;
+  font-size: 14px;
+  width: 100%;
+  line-height: 30px;
+  margin-top: 15px;
+}
+.main_view .account {
+  height: 30px;
+  margin: 0px 25px 0px 25px;
+  padding-left: 10px;
+  color: #666666;
+  font-size: 14px;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
+  background-color: #f3f3f3;
+}
+.main_view .logBtn {
+  margin: 25px 25px 25px 25px;
+  background-color: #e8654b;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
+}
+.bottom_flex {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  padding: 20px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  color: #333333;
+  font-size: 14px;
+}
+.bottom_flex .bottom_regist {
+  margin-left: 15px;
+  line-height: 15px;
+  text-decoration: underline;
+}
+.bottom_flex .bottom_forget {
+  margin-right: 15px;
+  line-height: 15px;
+  text-decoration: underline;
+}
+.type_text {
+  width: 100%;
+  text-align: center;
+  line-height: 30px;
+  height: 30px;
+  color: #007AFF;
+  font-size: 12px;
+  margin-top: 20px;
+}
+.yzm {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  margin: 0px 25px;
+}
+.yzm .yzmcontent {
+  background-color: #f3f3f3;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+  height: 30px;
+  margin: 0px;
+  padding-left: 10px;
+  color: #666;
+  font-size: 14px;
+  -webkit-border-top-left-radius: 5px;
+          border-top-left-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+}
+.yzm .yz {
+  color: #FFFFFF;
+  font-size: 12px;
+  height: 30px;
+  width: 80px;
+  line-height: 30px;
+  background-color: #e8654b;
+  border: none;
+  -webkit-border-top-right-radius: 5px;
+          border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+  text-align: center;
+}
+.yzm .yz_selected {
+  background-color: #919293;
+  color: #FFFFFF;
+}
+

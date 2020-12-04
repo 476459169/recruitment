@@ -1,48 +1,71 @@
 <template>
 	<view>
-		<view class="user_view">
-			<view class="user_view_img">
-			</view>
+		<view class="user_view" @click="setting()">
+			<image class="user_view_img"  :src="userInfo.headImgUrl.length>0?baseUrl+userInfo.headImgUrl:'../../static/login/addPic.png'" mode=""></image>
 			<view class="user_view_contentview">
 				<view class="user_view_contentview_title">
-					临语堂
+					{{userInfo.fullName.length>0?userInfo.fullName:''}}
 				</view>
-				<view class="user_view_contentview_zw">
-					未填写职务名称
-				</view>
+				<!-- <view  v-if="notios" class="user_view_contentview_zw">
+					<view v-if="userInfo.rz.length>0" class="">
+						
+					</view>
+				</view> -->
 			</view>
 			<!-- <image class="endImg" src="../../static/mine/endImg.png" mode=""></image> -->
 		</view>
-		
+
+		<view class="flex_item" @click="vipCenter()">
+			<image class="flex_item_img" src="../../static/mine/hyzx.png" mode=""></image>
+			<view class="flex_item_content">会员中心</view>
+			<image class="endImg" src="../../static/mine/endImg.png" mode=""></image>
+		</view>
+		<view class="line"></view>
+
+		<view class="flex_item" @click="invitation()">
+			<image class="flex_item_img" src="../../static/mine/yqh.png" mode=""></image>
+			<view class="flex_item_content">邀请函模板</view>
+			<image class="endImg" src="../../static/mine/endImg.png" mode=""></image>
+		</view>
+		<view class="line"></view>
+
+
 		<view class="flex_item" @click="manageJob()">
-			<image class="flex_item_img" src="../../static/mine/zwgl.png" mode=""></image>
-			<view class="flex_item_content">职位管理</view>
+			<image class="flex_item_img" src="../../static/mine/ddjl.png" mode=""></image>
+			<view class="flex_item_content">订单记录</view>
 			<image class="endImg" src="../../static/mine/endImg.png" mode=""></image>
 		</view>
 		<view class="line"></view>
-		
+
+		<view class="flex_item" @click="manageJob()">
+			<image class="flex_item_img" src="../../static/mine/wdfp.png" mode=""></image>
+			<view class="flex_item_content">我的发票</view>
+			<image class="endImg" src="../../static/mine/endImg.png" mode=""></image>
+		</view>
+		<view class="line"></view>
+
 		<view class="flex_item" @click="mangeCv()">
-			<image class="flex_item_img" src="../../static/mine/jlgl.png" mode=""></image>
-			<view class="flex_item_content">简历管理</view>
+			<image class="flex_item_img" src="../../static/mine/xxjx.png" mode=""></image>
+			<view class="flex_item_content">学习进修</view>
 			<image class="endImg" src="../../static/mine/endImg.png" mode=""></image>
 		</view>
 		<view class="line"></view>
-		
-		
+
+
 		<view class="flex_item">
-			<image class="flex_item_img" src="../../static/mine/wdgs.png" mode=""></image>
-			<view class="flex_item_content">我的公司</view>
+			<image class="flex_item_img" src="../../static/mine/xgmm.png" mode=""></image>
+			<view class="flex_item_content">修改密码</view>
 			<image class="endImg" src="../../static/mine/endImg.png" mode=""></image>
 		</view>
 		<view class="line"></view>
-		
-		<view class="flex_item">
-			<image class="flex_item_img" src="../../static/mine/wdgs.png" mode=""></image>
+
+		<view class="flex_item" @click="logout()">
+			<image class="flex_item_img" src="../../static/mine/tcdl.png" mode=""></image>
 			<view class="flex_item_content">退出登录</view>
 			<image class="endImg" src="../../static/mine/endImg.png" mode=""></image>
 		</view>
 		<view class="line"></view>
-		
+
 
 	</view>
 </template>
@@ -51,33 +74,99 @@
 	export default {
 		data() {
 			return {
-
+				userInfo: Object,
+				baseUrl: "http://39.105.48.243/crlink/",
+				notios:true
 			};
 		},
-		methods:{
-			manageJob(){
+
+		onLoad(e) {
+			this.baseUrl = getApp().globalData.baseUrl
+			uni.getSystemInfo({
+			    success: function (res) {
+						
+					if(res.platform == 'ios'){
+						_this.notios =  false
+					}
+			    }
+			});
+		},
+		onShow() {
+			this.getUserInfo()
+		},
+
+		methods: {
+			manageJob() {
 				uni.navigateTo({
-					url:'./jobmanage'
+					url: './jobmanage'
 				})
 			},
-			mangeCv(){
+			mangeCv() {
 				uni.navigateTo({
-					url:'./cvmanage'
+					url: './cvmanage'
 				})
+			},
+			
+			invitation(){
+				uni.navigateTo({
+					url: './invitation'
+				})
+			},
+			
+			vipCenter(){
+				uni.navigateTo({
+					url:'./vipCenter'
+				})
+			},
+
+			getUserInfo() {
+				var loginkey = uni.getStorageSync('loginKey');
+				this.$api.post('zpapp/enterprise!ajaxGetEnterpriseBaseInfo.action', {
+					loginKey: loginkey
+
+				}).then(res => {
+					if (res.res.status == 0) {
+						this.userInfo = res.inf
+					} else {
+						this.logout()
+					}
+				})
+			},
+
+
+			setting() {
+				var loginkey = uni.getStorageSync('loginKey');
+				if (loginkey.length > 0) {
+					uni.navigateTo({
+						url: './enterpriseCertification'
+					})
+				} else {
+					uni.navigateTo({
+						url: '../login/login'
+					})
+				}
+
+			},
+
+			logout() {
+				
+				uni.removeStorageSync('loginKey');
+				uni.removeStorageSync('userId');
+				uni.removeStorageSync('isFill');
+				this.userInfo = Object;
 			}
 		}
-		
+
 	}
 </script>
 
 <style lang="scss">
-	
-		
-	.line{
+	.line {
 		margin: 0px 10px;
 		height: 1px;
 		background-color: #cccccc;
 	}
+
 	.user_view {
 		margin: 30px 15px 20px 15px;
 		border-radius: 10px;
@@ -91,7 +180,7 @@
 			width: 60px;
 			height: 60px;
 			border-radius: 30px;
-			background-color: #e8654b;
+			// background-color: #e8654b;
 		}
 
 		.user_view_contentview {
@@ -99,17 +188,19 @@
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
-			.user_view_contentview_title{
+
+			.user_view_contentview_title {
 				font-size: 16px;
 				color: #000000;
 				line-height: 25px;
 			}
-			.user_view_contentview_zw{
+
+			.user_view_contentview_zw {
 				font-size: 14px;
 				color: #cccccc;
 				line-height: 25px;
 			}
-			
+
 		}
 	}
 
@@ -118,23 +209,25 @@
 		height: 15px;
 		width: 5px;
 	}
-	
-	.flex_item{
+
+	.flex_item {
 		display: flex;
 		align-items: center;
 		margin-top: 5px;
-		.flex_item_img{
+
+		.flex_item_img {
 			margin: 15px;
 			width: 15px;
 			height: 15px;
 		}
-		.flex_item_content{
+
+		.flex_item_content {
 			font-size: 14px;
 			// color: #000000;
 			line-height: 20px;
 			height: 20px;
 			flex: 1;
 		}
-		
+
 	}
 </style>

@@ -1,4 +1,9 @@
 {
   "navigationBarTitleText": "简历详情",
-  "usingComponents": {}
+  "navigationBarBackgroundColor": "#FFFFFF",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "popup-layer": "/components/popup-layer/popup-layer"
+  }
 }

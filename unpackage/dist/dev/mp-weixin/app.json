@@ -4,13 +4,20 @@
     "pages/login/login",
     "pages/mine/mine",
     "pages/login/regist",
+    "pages/login/newRegist",
     "pages/login/forgetPwd",
     "pages/home/screening",
     "pages/home/openPositions",
     "pages/communication/communication",
     "pages/mine/jobmanage",
     "pages/mine/cvmanage",
-    "pages/home/cvdetail"
+    "pages/home/cvdetail",
+    "pages/mine/enterpriseCertification",
+    "pages/mine/invitation",
+    "pages/mine/addInvitation",
+    "pages/communication/cvSubmit",
+    "pages/communication/sendInvitation",
+    "pages/mine/vipCenter"
   ],
   "subPackages": [],
   "window": {
@@ -27,21 +34,23 @@
     "list": [
       {
         "pagePath": "pages/home/home",
-        "iconPath": "static/home_g.png",
-        "selectedIconPath": "static/home_o.png"
+        "iconPath": "static/rc_g.jpg",
+        "selectedIconPath": "static/rc_o.jpg",
+        "text": "人才"
       },
       {
         "pagePath": "pages/communication/communication",
-        "iconPath": "static/communication_g.png",
-        "selectedIconPath": "static/communication_o.png"
+        "iconPath": "static/jl_g.jpg",
+        "selectedIconPath": "static/jl_o.jpg",
+        "text": "职位"
       },
       {
         "pagePath": "pages/mine/mine",
-        "iconPath": "static/mine_g.png",
-        "selectedIconPath": "static/mine_o.png"
+        "iconPath": "static/wd_g.jpg",
+        "selectedIconPath": "static/wd_o.jpg",
+        "text": "我的"
       }
     ]
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap18.json"
+  "usingComponents": {}
 }

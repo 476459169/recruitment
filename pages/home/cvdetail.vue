@@ -5,20 +5,19 @@
 				<view class="top_view_t_leftview">
 					<view class="top_view_t_leftview_titleview">
 						<view class="top_view_t_leftview_titleview_title">
-							临小妹
+							{{dataInf.userInfo.realName}}
 						</view>
-						<view class="top_view_t_leftview_titleview_img">
-
-						</view>
+						<image class="top_view_t_leftview_titleview_img" :src="dataInf.userInfo.sex===1?'../../static/home/man.png':'../../static/home/woman.png'"
+						 mode=""></image>
 						<view class="top_view_t_leftview_titleview_mes">
 							随时到岗
 						</view>
 					</view>
 					<view class="top_view_t_leftview_detailmsg">
-						{{'26岁&nbsp|&nbsp工作5年&nbsp|&nbsp本科&nbsp|&nbsp北京-丰台区'}}
+						{{dataInf.userInfo.userAge+'&nbsp|&nbsp工作'+dataInf.userInfo.workYears+'&nbsp|&nbsp'+dataInf.education+'&nbsp|&nbsp'+dataInf.userInfo.livingLocation}}
 					</view>
 					<view class="top_view_t_leftview_detailmsg">
-						户籍吉林
+						{{dataInf.userInfo.hukouLocation}}
 					</view>
 				</view>
 				<view class="top_view_t_rightview">
@@ -32,18 +31,19 @@
 						求职意向
 					</view>
 					<view class="top_view_b_leftview_wantjob">
-						{{'产品经理 &nbsp&nbsp产品专员&nbsp&nbsp产品助理'}}
+						{{dataInf.wantedIntention.expectedPosition}}
 					</view>
-					<view class="top_view_b_leftview_detailmsg">
+					<!-- 	<view class="top_view_b_leftview_detailmsg">
 						{{'互联网&nbsp|&nbsp医疗设备&nbsp|&nbsp零售/批发'}}
-					</view>
+						{{dataInf.wantedIntention}}
+					</view> -->
 					<view class="top_view_b_leftview_adress">
-						北京
+						{{dataInf.wantedIntention.location}}
 					</view>
 				</view>
 
 				<view class="top_view_b_rightview">
-					1万-1.5万
+					{{dataInf.wantedIntention.expectedSalary}}
 				</view>
 			</view>
 		</view>
@@ -54,81 +54,138 @@
 			<view class="work_experience_bt">
 				工作经历
 			</view>
-			<view class="work_experience_item" v-for="(item,index) in data.workExperience" :key="index">
+			<view class="work_experience_item" v-for="(item,index) in dataInf.workExpArr" :key="index">
 				<image class="work_experience_item_img" src="../../static/home/star.png" mode=""></image>
 				<view class="work_experience_item_content">
 					<view class="work_experience_item_content_blackText">
-						{{item.company}}
+						{{item.companyName}}
 					</view>
 					<view class="work_experience_item_content_garytext">
-						{{item.workTime}}
+						{{item.workDate}}
 					</view>
 					<view class="work_experience_item_content_blackText">
-						{{item.job+'&nbsp'+item.salary}}
+						{{item.positionName+'&nbsp'+item.monthSalary}}
 					</view>
 					<view class="work_experience_item_content_blackText">
-						{{item.workMsg}}
+						{{item.workDescription}}
 					</view>
 				</view>
 			</view>
 		</view>
-		
+
 		<view class="work_experience">
 			<view class="work_experience_bt">
 				教育经历
 			</view>
-			<view class="work_experience_item" v-for="(item,index) in data.educationExperience" :key="index">
+			<view class="work_experience_item" v-for="(item,index) in dataInf.educationArr" :key="index">
 				<image class="work_experience_item_img" src="../../static/home/star.png" mode=""></image>
 				<view class="work_experience_item_content">
 					<view class="work_experience_item_content_blackText">
-						{{item.school}}
+						{{item.schoolName}}
 					</view>
 					<view class="work_experience_item_content_garytext">
-						{{item.beginTime+'&nbsp'+item.endTime}}
+						{{item.studyDate}}
 					</view>
 					<view class="work_experience_item_content_blackText">
-						{{item.subject+'&nbsp'+item.education}}
+						{{item.major+'&nbsp'+item.education}}
 					</view>
 				</view>
 			</view>
 		</view>
-		
+
 		<view class="work_experience">
 			<view class="work_experience_bt">
 				项目经历
 			</view>
-			<view class="work_experience_item" v-for="(item,index) in data.ProjectExperience" :key="index">
+			<view class="work_experience_item" v-for="(item,index) in dataInf.projectExpArr" :key="index">
 				<image class="work_experience_item_img" src="../../static/home/star.png" mode=""></image>
 				<view class="work_experience_item_content">
 					<view class="work_experience_item_content_blackText">
-						{{item.Project}}
+						{{item.companyName}}
 					</view>
 					<view class="work_experience_item_content_garytext">
-						{{item.beginTime+'&nbsp'+item.endTime}}
+						{{item.projectDate}}
 					</view>
 					<view class="work_experience_item_content_blackText">
 						项目描述：
 					</view>
 					<view class="work_experience_item_content_blackText">
-						{{item.ProjectDescription}}
+						{{item.description}}
 					</view>
 				</view>
 			</view>
 		</view>
-		
+
 		<view class="work_experience">
 			<view class="work_experience_bt">
 				自我评价
 			</view>
 			<view class="work_experience_item">
 				<view class="work_experience_item_content_blackText" style="margin-left: 10px;">
-					{{data.selfAssessment}}  
+					{{dataInf.selfEvaluation}}
 				</view>
 			</view>
 		</view>
-		
-		
-		<button class="bottom_btn" type="default">立即沟通</button>
+
+
+		<!-- <button class="bottom_btn" type="default">立即沟通</button>
+		 -->
+		<view class="bottom_btns">
+			<view class="bottom_btns_btn" @click="notOk()">
+				不合适
+			</view>
+			<view class="bottom_btns_btn" @click="invitation()">
+				面试邀请
+			</view>
+			<view class="bottom_btns_btn_callme" @click="callme()">
+				联系方式
+			</view>
+		</view>
+
+
+		<popup-layer ref="popupRef" :direction="'top'" v-model="boolShow" style="background-color: #f5f7f8;">
+			
+			<view class="potitle">
+				查看联系方式
+			</view>
+			<view class="" style="width: calc(100vw - 20px);margin-left: 10px;">
+				<view class="popView_items">
+					<view class="popView_items_title">
+						真实姓名:
+					</view>
+					<view class="popView_items_content">
+						{{userInf.realName}}
+					</view>
+				</view>
+				<view class="popView_items">
+					<view class="popView_items_title">
+						手机号码:
+					</view>
+					<view class="popView_items_content">
+						{{userInf.contactPhoneNum}}
+					</view>
+				</view>
+				<view class="popView_items">
+					<view class="popView_items_title">
+						email:
+					</view>
+					<view class="popView_items_content">
+						{{userInf.email}}
+					</view>
+				</view>
+				
+				<view class="popbtns">
+					<view class="popbtn_item_left" @click="close()">
+						关闭
+					</view>
+					<view class="popbtn_item_right" @click="callPhone()">
+						拨打电话
+					</view>
+				</view>
+				
+				
+			</view>
+		</popup-layer>
 	</view>
 </template>
 
@@ -136,57 +193,90 @@
 	export default {
 		data() {
 			return {
-				data: {
-					name: '临小妹',
-					age: '26岁',
-					worktime: '工作5年',
-					xl: '本科',
-					nowadress: '北京-丰台区',
-					wantjob: '产品经理 产品专员',
-					jobMes: '互联网',
-					jobAdress: '北京',
-					selfAssessment: '自我评价',
-					workExperience: [{
-							company: '临语堂（天津）健康管理有限公司',
-							workTime: '2019年3月-至今',
-							job: '产品经理',
-							salary: '10k-15k',
-							workMsg: '工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述'
-						},
-						{
-							company: '临语堂（天津）健康管理有限公司',
-							workTime: '2019年3月-至今',
-							job: '经理',
-							salary: '10k-15k',
-							workMsg: '工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述工作描述'
-						}
-					],
-					educationExperience: [{
-							school: '吉林医学院',
-							beginTime: '2010年09月',
-							endTime: '2014年07月',
-							subject: '药剂学',
-							education: '本科'
-						},
-						{
-							school: '吉林医学院',
-							beginTime: '2010年09月',
-							endTime: '2014年07月',
-							subject: '药剂学',
-							education: '本科'
-						}
-					],
-					ProjectExperience: [{
-						Project: '上海国药会',
-						beginTime: '2010年09月',
-						endTime: '2014年07月',
-						ProjectDescription: '文字描述···'
-
-					}]
-
-
-				}
+				id: '',
+				dataInf: Object,
+				resumeId: '',
+				boolShow: false,
+				userInf:Object
 			}
+		},
+		onLoad(e) {
+			this.id = e.id
+			this.resumeId = e.resumeId
+			this.getData()
+		},
+		methods: {
+			getData() {
+
+				let loginkey = uni.getStorageSync('loginKey')
+				this.$api.post('zpapp/zpResume!ajaxGetDeliveryResumeDetail.action', {
+					loginKey: loginkey,
+					id: this.id,
+					resumeId: this.resumeId
+				}).then(res => {
+					if (res.res.status == 0) {
+						this.dataInf = res.inf
+					} else {
+						uni.showToast({
+							title: res.res.errMsg,
+						})
+					}
+
+				})
+			},
+			notOk() {
+				let loginkey = uni.getStorageSync('loginKey')
+				this.$api.post('zpapp/zpResume!ajaxSetUnsuitableStatus.action', {
+					loginKey: loginkey,
+					id: this.id,
+				}).then(res => {
+					if (res.res.status == 0) {
+						uni.navigateBack({
+
+						})
+					} else {
+						uni.showToast({
+							title: res.res.errMsg,
+						})
+					}
+
+				})
+			},
+
+			invitation() {
+				uni.navigateTo({
+					url: '../communication/sendInvitation?id=' + this.id + '&resumeId=' + this.resumeId
+				})
+			},
+			callme() {
+				let loginkey = uni.getStorageSync('loginKey')
+				this.$api.post('zpapp/zpResume!ajaxGetUserContactInfo.action', {
+					loginKey: loginkey,
+					id: this.resumeId,
+				}).then(res => {
+					if (res.res.status == 0) {
+						this.userInf = res.inf
+						this.$refs.popupRef.show();
+					} else {
+						uni.showToast({
+							title: res.res.errMsg,
+						})
+					}
+
+				})
+			},
+			
+				
+			close(){
+					this.$refs.popupRef.close();
+			},
+			
+			callPhone(){
+				wx.makePhoneCall({
+					phoneNumber:this.userInf.contactPhoneNum
+				})
+			}
+			
 		}
 	}
 </script>
@@ -217,6 +307,7 @@
 					display: flex;
 					line-height: 25px;
 					height: 25px;
+					// align-items: center;
 
 					.top_view_t_leftview_titleview_title {
 						font-size: 16px;
@@ -225,13 +316,18 @@
 					.top_view_t_leftview_titleview_img {
 						width: 10px;
 						height: 10px;
+						margin-left: 5px;
 						border-radius: 5px;
-						background-color: #000000;
+						margin-top: 3px;
 					}
 
 					.top_view_t_leftview_titleview_mes {
 						font-size: 10px;
+						margin-left: 5px;
 						color: #666666;
+						line-height: 20px;
+						height: 20px;
+						margin-top: 5px;
 					}
 				}
 
@@ -324,11 +420,13 @@
 			.work_experience_item_content {
 				flex: 1;
 				padding: 10px;
+				font-size: 12px;
 
 				.work_experience_item_content_blackText {
 
 					line-height: 20px;
 					color: #666666;
+					font-size: 12px;
 				}
 
 				.work_experience_item_content_garytext {
@@ -337,17 +435,112 @@
 
 					line-height: 20px;
 					color: #b3b3b3;
+					font-size: 12px;
 				}
 
 			}
 		}
 	}
-	
-	.bottom_btn{
+
+	.bottom_btn {
 		background-color: #e8654b;
 		color: #FFFFFF;
 		font-size: 15px;
 		border-radius: 5px;
 		margin: 30px;
+	}
+
+	.bottom_btns {
+		display: flex;
+		margin: 30px 0px;
+		align-items: center;
+
+		.bottom_btns_btn {
+			margin: 0px 10px;
+			flex: 1;
+			border: 1px solid #e8654b;
+			border-radius: 5px;
+			background-color: #fddfd6;
+			color: #e8654b;
+			font-size: 14px;
+			text-align: center;
+			line-height: 25px;
+			height: 25px;
+		}
+
+		.bottom_btns_btn_callme {
+			margin: 0px 10px;
+			flex: 1;
+			border: 1px solid #e8654b;
+			border-radius: 5px;
+			background-color: #e8654b;
+			color: #FFFFFF;
+			font-size: 14px;
+			text-align: center;
+			line-height: 25px;
+			height: 25px;
+		}
+	}
+
+	.popView_items {
+		display: flex;
+		padding: 5px 10px;
+
+		.popView_items_title {
+			font-size: 14px;
+			color: #333333;
+			line-height: 25px;
+			height: 25px;
+			flex: 1;
+		}
+		
+		.popView_items_content{
+			font-size: 14px;
+			color: #666666;
+			line-height: 25px;
+			height: 25px;
+		}
+		
+	}
+	
+	.potitle{
+		width: 100%;
+		text-align: center;
+		font-size: 14px;
+		color: #000000;
+		height: 30px;
+		line-height: 30px;
+	}
+	
+	.popbtns{
+		display: flex;
+		align-items: center;
+		width: 100%;
+		margin-top: 20px;
+		margin-bottom: 20px;
+		.popbtn_item_left{
+			margin: 0px 10px;
+			flex: 1;
+			border: 1px solid #e8654b;
+			border-radius: 5px;
+			background-color: #fddfd6;
+			color: #e8654b;
+			font-size: 14px;
+			text-align: center;
+			line-height: 25px;
+		}
+		
+		.popbtn_item_right{
+			margin: 0px 10px;
+			flex: 1;
+			border: 1px solid #e8654b;
+			border-radius: 5px;
+			background-color: #e8654b;
+			color: #FFFFFF;
+			font-size: 14px;
+			text-align: center;
+			line-height: 25px;
+			height: 25px;
+		}
 	}
 </style>

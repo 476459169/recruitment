@@ -3,38 +3,60 @@
 		{
 		    "path" : "pages/home/home",
 		    "style" : {
-				"navigationBarTitleText": "首页"
+				"navigationBarTitleText": "首页",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black",
+				"enablePullDownRefresh":true
 			}
 		},{
             "path" : "pages/login/login",
             "style" : {
-				"navigationBarTitleText": "登录"
+				"navigationBarTitleText": "登录",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black"
 			}
         }  ,{
             "path" : "pages/mine/mine",
             "style" : {
-				"navigationBarTitleText": "我的"
+				"navigationBarTitleText": "我的",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black"
 			}
         }
         ,{
             "path" : "pages/login/regist",
             "style" : {
-				"navigationBarTitleText": "注册"
+				"navigationBarTitleText": "注册",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black"
+			}
+        },{
+            "path" : "pages/login/newRegist",
+            "style" : {
+				"navigationBarTitleText": "注册",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black"
 			}
         },{
             "path" : "pages/login/forgetPwd",
             "style" : {
-				"navigationBarTitleText": "忘记密码"
+				"navigationBarTitleText": "忘记密码",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black"
 			}
         },{
             "path" : "pages/home/screening",
             "style" : {
-				"navigationBarTitleText": "筛选"
+				"navigationBarTitleText": "筛选",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black"
 			}
         },{
             "path" : "pages/home/openPositions",
             "style" : {
-				"navigationBarTitleText": "发布职位"
+				"navigationBarTitleText": "发布职位",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black"
 			}
         }
 		
@@ -42,25 +64,76 @@
         ,{
             "path" : "pages/communication/communication",
             "style" : {
-				"navigationBarTitleText": "交流"
+				"navigationBarTitleText": "交流",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black"
 			}
         },
 		{
 		    "path" : "pages/mine/jobmanage",
 		    "style" : {
-				"navigationBarTitleText": "职位管理"
+				"navigationBarTitleText": "职位管理",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black"
 			} 
 		},
 		{
 		    "path" : "pages/mine/cvmanage",
 		    "style" : {
-				"navigationBarTitleText": "简历管理"
+				"navigationBarTitleText": "简历管理",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black"
 			} 
 		},
 		{
 		    "path" : "pages/home/cvdetail",
 		    "style" : {
-				"navigationBarTitleText": "简历详情"
+				"navigationBarTitleText": "简历详情",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black",
+				"enablePullDownRefresh":true
+			} 
+		},{
+		    "path" : "pages/mine/enterpriseCertification",
+		    "style" : {
+				"navigationBarTitleText": "企业认证",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black"
+			} 
+		},{
+		    "path" : "pages/mine/invitation",
+		    "style" : {
+				"navigationBarTitleText": "邀请函模板",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black"
+			} 
+		},{
+		    "path" : "pages/mine/addInvitation",
+		    "style" : {
+				"navigationBarTitleText": "创建模板",
+				"navigationBarBackgroundColor":"#FFFFFF", 
+				"navigationBarTextStyle":"black"
+			} 
+		},{
+		    "path" : "pages/communication/cvSubmit",
+		    "style" : {
+				"navigationBarTitleText": "投递的简历",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black"
+			} 
+		},{
+		    "path" : "pages/communication/sendInvitation",
+		    "style" : {
+				"navigationBarTitleText": "发送面试邀请",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black"
+			} 
+		},{
+		    "path" : "pages/mine/vipCenter",
+		    "style" : {
+				"navigationBarTitleText": "会员中心",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black"
 			} 
 		}
 		
@@ -79,16 +152,19 @@
 		"backgroundColor": "#ffffff",
 		"list": [{
 			"pagePath": "pages/home/home",
-			"iconPath": "static/home_g.png",
-			"selectedIconPath": "static/home_o.png"
+			"iconPath": "static/rc_g.jpg",
+			"selectedIconPath": "static/rc_o.jpg",
+			"text": "人才"
 		}, {
 			"pagePath": "pages/communication/communication",
-			"iconPath": "static/communication_g.png",
-			"selectedIconPath": "static/communication_o.png"
+			"iconPath": "static/jl_g.jpg",
+			"selectedIconPath": "static/jl_o.jpg",
+			"text":"职位"
 		}, {
 			"pagePath": "pages/mine/mine",
-			"iconPath": "static/mine_g.png",
-			"selectedIconPath": "static/mine_o.png"
+			"iconPath": "static/wd_g.jpg",
+			"selectedIconPath": "static/wd_o.jpg",
+			"text":"我的"
 		}]
 	},
 	"globalStyle": {

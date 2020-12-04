@@ -42,7 +42,8 @@
   background-color: #fbc9bc;
   color: #8f9291;
   font-size: 14px;
-  border-radius: 5px;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
   width: 30%;
   height: 25px;
   margin-top: 10px;
@@ -113,13 +114,15 @@
 .list .cell .cell_endView .cell_endView_img {
   width: 40px;
   height: 40px;
-  border-radius: 20px;
+  -webkit-border-radius: 20px;
+          border-radius: 20px;
   background-color: #e8654b;
 }
 .list .cell .cell_endView .cell_endView_btn {
   margin-top: 10px;
   border: 1px solid #666666;
-  border-radius: 10px;
+  -webkit-border-radius: 10px;
+          border-radius: 10px;
   height: 20px;
   width: 80px;
   font-size: 12px;

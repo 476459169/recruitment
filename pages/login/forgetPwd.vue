@@ -1,56 +1,85 @@
 <template>
 	<view class="">
 		<view class="titleLabel">账号</view>
-		<input class="input_text" type="text" value="" placeholder="请输入公司名称或手机号" />
-		
-		
+		<input class="input_text" v-model="account" type="text" value="" placeholder="请输入公司名称或手机号" />
+
+
 		<view class="titleLabel">新密码</view>
-		<input class="input_text" type="text" value="" placeholder="6-12位密码" />
+		<input class="input_text" v-model="pwd" type="text" value="" placeholder="6-12位密码" />
 
-         <view class="titleLabel">重复密码</view>
-		<input class="input_text" type="text" value="" placeholder="" />
+		<view class="titleLabel">重复密码</view>
+		<input class="input_text" v-model="comfirmpwd" type="text" value="" />
 
-		
+
 		<view class="titleLabel">手机号</view>
 		<view class="phone_view">
-			<input class="phone_number" type="text" value="" placeholder="您的手机号码"/>
+			<input class="phone_number" v-model="phoneNumber" type="text" value="" placeholder="您的手机号码" />
 			<view class="phone_yzm">
 				发送验证码
 			</view>
 		</view>
-		
+
 		<view class="titleLabel">验证码</view>
-		<input class="input_text" type="text" value="" placeholder="请输入收到的验证码" />
-		
-		
-		<button class="bottom_btn" type="default">确定</button>
+		<input class="input_text" v-model="code" type="text" value="" placeholder="请输入收到的验证码" />
+
+
+		<button class="bottom_btn" type="default" @click="saveClick()">确定</button>
 	</view>
-	
-	
-	
+
+
+
 </template>
 
 <script>
 	import areaData from './area-data-min'
 
 	export default {
-		data(){
+		data() {
 			return {
+				account: '',
+				pwd: '',
+				comfirmpwd: '',
+				phoneNumber: '',
+				code: '',
+
 				value2: [], //公司所在地
-				companyList:['1-50人','50-100人','100-500人','500人以上'],
-				companyScale:'1-50人',
+				companyList: ['1-50人', '50-100人', '100-500人', '500人以上'],
+				companyScale: '1-50人',
 				list: areaData,
 			}
-	},
+		},
 
 		methods: {
-handleTap (picker) {
+			handleTap(picker) {
 				this.$refs[picker].show()
 				// console.log("handleTap");
 			},
-			handleChange (item) {
+			handleChange(item) {
 				// console.log('change::', item)
+			},
+			
+			saveClick(){
+				this.$api.post('zpapp/enterprise!ajaxResetPassword.action', {
+					tel: this.account,
+					phoneCode:this.code,
+					password:this.pwd,
+					repeatPassword:this.comfirmpwd
+					
+					
+				}).then(res => {
+					if (res.res.status == 0) {
+						uni.showToast({
+							title:'修改成功',
+							success() {
+								uni.navigateBack({
+									
+								})
+							}
+						})
+					}
+				})
 			}
+			
 		}
 	}
 </script>
@@ -129,7 +158,8 @@ handleTap (picker) {
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				.add_itemImg{
+
+				.add_itemImg {
 					width: 8px;
 					height: 5px;
 				}
@@ -138,35 +168,36 @@ handleTap (picker) {
 		}
 
 	}
-	
-		
-	.address_detail_msg{
+
+
+	.address_detail_msg {
 		margin: 0px 15px;
 		width: calc(100vw - 40px);
-		height:50px;
+		height: 50px;
 		font-size: 14px;
 		background-color: #f5f7f8;
 		padding: 5px;
 		border-radius: 5px;
 	}
-	
-	
-	.phone_view{
+
+
+	.phone_view {
 		display: flex;
-		margin:0px 15px 15px 15px;
+		margin: 0px 15px 15px 15px;
 		border-radius: 5px;
 		background-color: #f5f7f8;
 		font-size: 14px;
-		.phone_number{
-			flex:1;
+
+		.phone_number {
+			flex: 1;
 			padding: 5px;
 			line-height: 20px;
 			color: #666666;
 			font-size: 14px;
 		}
-		
-			
-		.phone_yzm{
+
+
+		.phone_yzm {
 			width: 100px;
 			height: 30px;
 			background-color: #e8654b;
@@ -178,45 +209,46 @@ handleTap (picker) {
 			line-height: 30px;
 		}
 	}
-	
-		
-	.company{
-	display: flex;
-	margin:0px 15px 15px 15px;
-	border-radius: 5px;
-	background-color: #f5f7f8;
-	font-size: 14px;
-	color: #666666;
-	.company_content{
-		flex: 1;
-		padding: 5px;
-		
-	}
-	
-	.company_imgView {
-		width: 30px;
-		height: 30px;
-		background-color: #e8654b;
-		border-top-right-radius: 5px;
-		border-bottom-right-radius: 5px; //右下角
-		
+
+
+	.company {
 		display: flex;
-		align-items: center;
-		justify-content: center;
-		.company_img{
-			width: 8px;
-			height: 5px;
+		margin: 0px 15px 15px 15px;
+		border-radius: 5px;
+		background-color: #f5f7f8;
+		font-size: 14px;
+		color: #666666;
+
+		.company_content {
+			flex: 1;
+			padding: 5px;
+
 		}
+
+		.company_imgView {
+			width: 30px;
+			height: 30px;
+			background-color: #e8654b;
+			border-top-right-radius: 5px;
+			border-bottom-right-radius: 5px; //右下角
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			.company_img {
+				width: 8px;
+				height: 5px;
+			}
+		}
+
 	}
-	
-	}
-	
-	.bottom_btn{
+
+	.bottom_btn {
 		background-color: #e8654b;
 		color: #FFFFFF;
 		font-size: 15px;
 		border-radius: 5px;
 		margin: 30px;
 	}
-	
 </style>

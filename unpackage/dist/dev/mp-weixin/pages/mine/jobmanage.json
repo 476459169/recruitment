@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "职位管理",
+  "navigationBarBackgroundColor": "#FFFFFF",
+  "navigationBarTextStyle": "black",
   "usingComponents": {}
 }

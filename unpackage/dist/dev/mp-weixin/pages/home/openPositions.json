@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "发布职位",
+  "navigationBarBackgroundColor": "#FFFFFF",
+  "navigationBarTextStyle": "black",
   "usingComponents": {
     "lb-picker": "/components/lb-picker/index"
   }
