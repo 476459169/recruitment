@@ -17,7 +17,13 @@
     "pages/mine/addInvitation",
     "pages/communication/cvSubmit",
     "pages/communication/sendInvitation",
-    "pages/mine/vipCenter"
+    "pages/mine/vipCenter",
+    "pages/mine/invoice/invoice",
+    "pages/mine/invoice/outInvoice",
+    "pages/home/matchingPosition",
+    "pages/communication/normalSendInvitation",
+    "pages/mine/changePwd",
+    "pages/mine/invoice/invoiceHeader"
   ],
   "subPackages": [],
   "window": {
@@ -52,5 +58,6 @@
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap85.json"
 }

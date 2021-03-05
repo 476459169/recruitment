@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   popupLayer: function() {
-    return __webpack_require__.e(/*! import() | components/popup-layer/popup-layer */ "components/popup-layer/popup-layer").then(__webpack_require__.bind(null, /*! @/components/popup-layer/popup-layer.vue */ 160))
+    return __webpack_require__.e(/*! import() | components/popup-layer/popup-layer */ "components/popup-layer/popup-layer").then(__webpack_require__.bind(null, /*! @/components/popup-layer/popup-layer.vue */ 216))
   }
 }
 var render = function() {
@@ -323,8 +323,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 var _default =
 {
   data: function data() {
@@ -333,32 +331,58 @@ var _default =
       dataInf: Object,
       resumeId: '',
       boolShow: false,
-      userInf: Object };
+      userInf: Object,
+      type: null,
+      baseUrl: '' };
 
   },
   onLoad: function onLoad(e) {
     this.id = e.id;
     this.resumeId = e.resumeId;
+    this.baseUrl = getApp().globalData.baseUrl;
+    if (e.type) {
+      this.type = e.type;
+    }
     this.getData();
   },
   methods: {
     getData: function getData() {var _this = this;
 
       var loginkey = uni.getStorageSync('loginKey');
-      this.$api.post('zpapp/zpResume!ajaxGetDeliveryResumeDetail.action', {
-        loginKey: loginkey,
-        id: this.id,
-        resumeId: this.resumeId }).
-      then(function (res) {
-        if (res.res.status == 0) {
-          _this.dataInf = res.inf;
-        } else {
-          uni.showToast({
-            title: res.res.errMsg });
 
-        }
+      if (this.type) {
+        this.$api.post('zpapp/zpResume!ajaxGetResumeDetail.action', {
+          loginKey: loginkey,
+          resumeId: this.resumeId }).
+        then(function (res) {
+          if (res.res.status == 0) {
+            _this.dataInf = res.inf;
+          } else {
+            uni.showToast({
+              title: res.res.errMsg });
 
-      });
+          }
+
+        });
+      } else {
+        this.$api.post('zpapp/zpResume!ajaxGetDeliveryResumeDetail.action', {
+          loginKey: loginkey,
+          id: this.id,
+          resumeId: this.resumeId }).
+        then(function (res) {
+          if (res.res.status == 0) {
+            _this.dataInf = res.inf;
+          } else {
+            uni.showToast({
+              title: res.res.errMsg });
+
+          }
+
+        });
+      }
+
+
+
     },
     notOk: function notOk() {
       var loginkey = uni.getStorageSync('loginKey');
@@ -380,8 +404,16 @@ var _default =
     },
 
     invitation: function invitation() {
-      uni.navigateTo({
-        url: '../communication/sendInvitation?id=' + this.id + '&resumeId=' + this.resumeId });
+
+      if (this.type) {
+        uni.navigateTo({
+          url: './matchingPosition?id=' + this.resumeId });
+
+      } else {
+        uni.navigateTo({
+          url: '../communication/sendInvitation?id=' + this.id + '&resumeId=' + this.resumeId });
+
+      }
 
     },
     callme: function callme() {var _this2 = this;

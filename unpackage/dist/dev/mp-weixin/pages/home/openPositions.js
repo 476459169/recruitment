@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   lbPicker: function() {
-    return Promise.all(/*! import() | components/lb-picker/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/lb-picker/index")]).then(__webpack_require__.bind(null, /*! @/components/lb-picker/index.vue */ 152))
+    return Promise.all(/*! import() | components/lb-picker/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/lb-picker/index")]).then(__webpack_require__.bind(null, /*! @/components/lb-picker/index.vue */ 208))
   }
 }
 var render = function() {
@@ -412,7 +412,7 @@ var _areaDataMin = _interopRequireDefault(__webpack_require__(/*! ../login/area-
 
     okClick: function okClick(e) {
       var loginkey = uni.getStorageSync('loginKey');
-      if (this.dataInf.location.length > 0) {
+      if (this.dataInf.location.length === 3) {
         this.dataInf.location = this.dataInf.location.join('-');
       }
 

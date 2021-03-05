@@ -3347,182 +3347,6 @@ function _reslog(res) {
 
 /***/ }),
 
-/***/ 157:
-/*!**************************************************************************************!*\
-  !*** /Users/linyutang/Desktop/recruitment/recruitment/components/lb-picker/utils.js ***!
-  \**************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.isObject = isObject;exports.getColumns = getColumns; /**
-                                                                                                                                         * 判断是否是对象
-                                                                                                                                         *
-                                                                                                                                         * @export
-                                                                                                                                         * @param {*} val
-                                                                                                                                         * @returns true/false
-                                                                                                                                         */
-function isObject(val) {
-  return Object.prototype.toString.call(val) === '[object Object]';
-}
-
-/**
-   * 根据value获取columns信息
-   *
-   * @export
-   * @param {*} { value, list, mode, props, level }
-   * @param {number} [type=2] 查询不到value数据返回数据类型 1空值null 2默认第一个选项
-   * @returns
-   */
-function getColumns(_ref) {var value = _ref.value,list = _ref.list,mode = _ref.mode,props = _ref.props,level = _ref.level;var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
-  var pickerValue = [];
-  var pickerColumns = [];
-  var selectValue = [];
-  var selectItem = [];
-  var columnsInfo = null;
-  switch (mode) {
-    case 'selector':
-      var index = list.findIndex(function (item) {
-        return isObject(item) ? item[props.value] === value : item === value;
-      });
-      if (index === -1 && type === 1) {
-        columnsInfo = null;
-      } else {
-        index = index > -1 ? index : 0;
-        selectItem = list[index];
-        selectValue = isObject(selectItem) ?
-        selectItem[props.value] :
-        selectItem;
-        pickerColumns = list;
-        pickerValue = [index];
-        columnsInfo = {
-          index: pickerValue,
-          value: selectValue,
-          item: selectItem,
-          columns: pickerColumns };
-
-      }
-      break;
-    case 'multiSelector':
-      var setPickerItems = function setPickerItems() {var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];var index = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-        if (!data.length) return;
-        var defaultValue = value || [];
-        if (index < level) {
-          var _value = defaultValue[index] || '';
-
-          var i = data.findIndex(function (item) {return item[props.label] === _value;});
-          if (i === -1 && type === 1) return;
-          i = i > -1 ? i : 0;
-          pickerValue[index] = i;
-          pickerColumns[index] = data;
-          if (data[i]) {
-            selectValue[index] = data[i][props.label];
-            selectItem[index] = data[i];
-            setPickerItems(data[i][props.children] || [], index + 1);
-          }
-        }
-      };
-      setPickerItems(list);
-      if (!selectValue.length && type === 1) {
-        columnsInfo = null;
-      } else {
-        columnsInfo = {
-          index: pickerValue,
-          value: selectValue,
-          item: selectItem,
-          columns: pickerColumns };
-
-      }
-      break;
-    case 'unlinkedSelector':
-      list.forEach(function (item, i) {
-        var index = item.findIndex(function (item) {
-          return isObject(item) ?
-          item[props.value] === value[i] :
-          item === value[i];
-        });
-        if (index === -1 && type === 1) return;
-        index = index > -1 ? index : 0;
-        var columnItem = list[i][index];
-        var valueItem = isObject(columnItem) ?
-        columnItem[props.value] :
-        columnItem;
-        pickerValue[i] = index;
-        selectValue[i] = valueItem;
-        selectItem[i] = columnItem;
-      });
-      pickerColumns = list;
-      if (!selectValue.length && type === 1) {
-        columnsInfo = null;
-      } else {
-        columnsInfo = {
-          index: pickerValue,
-          value: selectValue,
-          item: selectItem,
-          columns: pickerColumns };
-
-      }
-      break;}
-
-  return columnsInfo;
-}
-
-/***/ }),
-
-/***/ 172:
-/*!*********************************************************************************************!*\
-  !*** /Users/linyutang/Desktop/recruitment/recruitment/components/lb-picker/mixins/index.js ***!
-  \*********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.commonMixin = void 0;var _utils = __webpack_require__(/*! ../utils */ 157);
-var commonMixin = {
-  data: function data() {
-    return {
-      indicatorStyle: "height: 34px" };
-
-  },
-  created: function created() {
-    this.init('init');
-  },
-  methods: {
-    init: function init(changeType) {
-      if (this.list && this.list.length) {
-        var column = (0, _utils.getColumns)({
-          value: this.value,
-          list: this.list,
-          mode: this.mode,
-          props: this.props,
-          level: this.level });var
-
-        columns = column.columns,value = column.value,item = column.item,index = column.index;
-        this.selectValue = value;
-        this.selectItem = item;
-        this.pickerColumns = columns;
-        this.pickerValue = index;
-        this.$emit('change', {
-          value: this.selectValue,
-          item: this.selectItem,
-          index: this.pickerValue,
-          change: changeType });
-
-      }
-    } },
-
-  watch: {
-    value: function value() {
-      if (!this.isConfirmChange) {
-        this.init('value');
-      }
-    },
-    list: function list() {
-      this.init('list');
-    } } };exports.commonMixin = commonMixin;
-
-/***/ }),
-
 /***/ 2:
 /*!******************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js ***!
@@ -9567,6 +9391,182 @@ internalMixin(Vue);
 /* harmony default export */ __webpack_exports__["default"] = (Vue);
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../webpack/buildin/global.js */ 3)))
+
+/***/ }),
+
+/***/ 213:
+/*!**************************************************************************************!*\
+  !*** /Users/linyutang/Desktop/recruitment/recruitment/components/lb-picker/utils.js ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.isObject = isObject;exports.getColumns = getColumns; /**
+                                                                                                                                         * 判断是否是对象
+                                                                                                                                         *
+                                                                                                                                         * @export
+                                                                                                                                         * @param {*} val
+                                                                                                                                         * @returns true/false
+                                                                                                                                         */
+function isObject(val) {
+  return Object.prototype.toString.call(val) === '[object Object]';
+}
+
+/**
+   * 根据value获取columns信息
+   *
+   * @export
+   * @param {*} { value, list, mode, props, level }
+   * @param {number} [type=2] 查询不到value数据返回数据类型 1空值null 2默认第一个选项
+   * @returns
+   */
+function getColumns(_ref) {var value = _ref.value,list = _ref.list,mode = _ref.mode,props = _ref.props,level = _ref.level;var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
+  var pickerValue = [];
+  var pickerColumns = [];
+  var selectValue = [];
+  var selectItem = [];
+  var columnsInfo = null;
+  switch (mode) {
+    case 'selector':
+      var index = list.findIndex(function (item) {
+        return isObject(item) ? item[props.value] === value : item === value;
+      });
+      if (index === -1 && type === 1) {
+        columnsInfo = null;
+      } else {
+        index = index > -1 ? index : 0;
+        selectItem = list[index];
+        selectValue = isObject(selectItem) ?
+        selectItem[props.value] :
+        selectItem;
+        pickerColumns = list;
+        pickerValue = [index];
+        columnsInfo = {
+          index: pickerValue,
+          value: selectValue,
+          item: selectItem,
+          columns: pickerColumns };
+
+      }
+      break;
+    case 'multiSelector':
+      var setPickerItems = function setPickerItems() {var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];var index = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+        if (!data.length) return;
+        var defaultValue = value || [];
+        if (index < level) {
+          var _value = defaultValue[index] || '';
+
+          var i = data.findIndex(function (item) {return item[props.label] === _value;});
+          if (i === -1 && type === 1) return;
+          i = i > -1 ? i : 0;
+          pickerValue[index] = i;
+          pickerColumns[index] = data;
+          if (data[i]) {
+            selectValue[index] = data[i][props.label];
+            selectItem[index] = data[i];
+            setPickerItems(data[i][props.children] || [], index + 1);
+          }
+        }
+      };
+      setPickerItems(list);
+      if (!selectValue.length && type === 1) {
+        columnsInfo = null;
+      } else {
+        columnsInfo = {
+          index: pickerValue,
+          value: selectValue,
+          item: selectItem,
+          columns: pickerColumns };
+
+      }
+      break;
+    case 'unlinkedSelector':
+      list.forEach(function (item, i) {
+        var index = item.findIndex(function (item) {
+          return isObject(item) ?
+          item[props.value] === value[i] :
+          item === value[i];
+        });
+        if (index === -1 && type === 1) return;
+        index = index > -1 ? index : 0;
+        var columnItem = list[i][index];
+        var valueItem = isObject(columnItem) ?
+        columnItem[props.value] :
+        columnItem;
+        pickerValue[i] = index;
+        selectValue[i] = valueItem;
+        selectItem[i] = columnItem;
+      });
+      pickerColumns = list;
+      if (!selectValue.length && type === 1) {
+        columnsInfo = null;
+      } else {
+        columnsInfo = {
+          index: pickerValue,
+          value: selectValue,
+          item: selectItem,
+          columns: pickerColumns };
+
+      }
+      break;}
+
+  return columnsInfo;
+}
+
+/***/ }),
+
+/***/ 228:
+/*!*********************************************************************************************!*\
+  !*** /Users/linyutang/Desktop/recruitment/recruitment/components/lb-picker/mixins/index.js ***!
+  \*********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.commonMixin = void 0;var _utils = __webpack_require__(/*! ../utils */ 213);
+var commonMixin = {
+  data: function data() {
+    return {
+      indicatorStyle: "height: 34px" };
+
+  },
+  created: function created() {
+    this.init('init');
+  },
+  methods: {
+    init: function init(changeType) {
+      if (this.list && this.list.length) {
+        var column = (0, _utils.getColumns)({
+          value: this.value,
+          list: this.list,
+          mode: this.mode,
+          props: this.props,
+          level: this.level });var
+
+        columns = column.columns,value = column.value,item = column.item,index = column.index;
+        this.selectValue = value;
+        this.selectItem = item;
+        this.pickerColumns = columns;
+        this.pickerValue = index;
+        this.$emit('change', {
+          value: this.selectValue,
+          item: this.selectItem,
+          index: this.pickerValue,
+          change: changeType });
+
+      }
+    } },
+
+  watch: {
+    value: function value() {
+      if (!this.isConfirmChange) {
+        this.init('value');
+      }
+    },
+    list: function list() {
+      this.init('list');
+    } } };exports.commonMixin = commonMixin;
 
 /***/ }),
 

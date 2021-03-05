@@ -28,13 +28,13 @@
 					<view class="click_item_line" v-if="selectType==0"></view>
 				</view>
 
-				<view class="click_item">
+			<!-- 	<view class="click_item">
 					<view class="click_item_text" :class="[selectType==1?'select_textcolor':'']" @click="typeClick(1)">最新</view>
 					<view class="click_item_line" v-if="selectType==1"></view>
 				</view>
 
 				<view class="click_none"></view>
-				<!-- <view class="click_sx_view" @click="screenClick()">
+				<view class="click_sx_view" @click="screenClick()">
 					<view class="click_sx_title">筛选</view>
 					<image class="click_sx_img" src="../../static/home/rc_sx.png" mode=""></image>
 				</view> -->
@@ -172,7 +172,7 @@
 
 			itemClick(item) {
 				uni.navigateTo({
-					url: './cvdetail'
+					url: './cvdetail?resumeId='+item.id+'&type='+'home'
 				})
 			},
 			//获取节点距离顶部的距离

@@ -135,8 +135,50 @@
 				"navigationBarBackgroundColor":"#FFFFFF",
 				"navigationBarTextStyle":"black"
 			} 
+		},{
+		    "path" : "pages/mine/invoice/invoice",
+		    "style" : {
+				"navigationBarTitleText": "开具发票",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black"
+			} 
+		},{
+		    "path" : "pages/mine/invoice/outInvoice",
+		    "style" : {
+				"navigationBarTitleText": "开具发票",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black"
+			} 
+		},{
+		    "path" : "pages/home/matchingPosition",
+		    "style" : {
+				"navigationBarTitleText": "匹配职位",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black"
+			} 
+		},{
+		    "path" : "pages/communication/normalSendInvitation",
+		    "style" : {
+				"navigationBarTitleText": "面试邀请",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black"
+			} 
+		},{
+		    "path" : "pages/mine/changePwd",
+		    "style" : {
+				"navigationBarTitleText": "修改密码",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black"
+			} 
+		},{
+		    "path" : "pages/mine/invoice/invoiceHeader",
+		    "style" : {
+				"navigationBarTitleText": "发票抬头",
+				"navigationBarBackgroundColor":"#FFFFFF",
+				"navigationBarTextStyle":"black"
+			} 
 		}
-		
+		 
     ],
 	"easycom": {
 		"autoscan": true,

@@ -24,7 +24,7 @@
 			</view>
 		</view>
 
-		<textarea class="text_content" maxlength="-1" cursor-spacing="1"  v-model="dataInf.defaultResponsibility" placeholder="" />
+		<textarea class="text_content" maxlength="-1" cursor-spacing="1"  v-model="dataInf.defaultResponsibility" />
 
 		<view class="bottom_view">
 			<view class="bottom_view_leftview" @click="save()">
@@ -96,21 +96,13 @@
 			
 			handleConfirm1(e){
 				this.defaultPlateContent = e.value.map(item => item).join('-');
-				for (var i = 0; i < e.item.length; i++) {
-					if (i == 0) {
-						console.log('classificationContent=' + e.item[i].id);
-						this.dataInf.defaultId = e.item[i].id
+				for (var j = 0; j < this.dataInf.invitationCardArr.length; j++) {
+					var item = this.dataInf.invitationCardArr[j]
+					if(item.title === this.defaultPlateContent){
+						this.dataInf.defaultId = item.id
+						this.dataInf.defaultResponsibility = item.responsibility
 						
-						for (let j = 0; j < this.dataInf.invitationCardArr.length; j++) {
-							var item = this.dataInf.invitationCardArr[j]
-							if(item.id = this.dataInf.defaultId){
-								this.dataInf.defaultResponsibility = item.responsibility
-							}
-							
-						}
-					} else {
-							
-							
+						console.log('classificationContent=' + item.id);
 					}
 				}
 			},

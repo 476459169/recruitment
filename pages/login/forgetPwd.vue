@@ -23,7 +23,7 @@
 		<input class="input_text" v-model="code" type="text" value="" placeholder="请输入收到的验证码" />
 
 
-		<button class="bottom_btn" type="default" @click="saveClick()">确定</button>
+		<button class="bottom_btn"  @click="saveClick()">确定</button>
 	</view>
 
 
@@ -42,10 +42,6 @@
 				phoneNumber: '',
 				code: '',
 
-				value2: [], //公司所在地
-				companyList: ['1-50人', '50-100人', '100-500人', '500人以上'],
-				companyScale: '1-50人',
-				list: areaData,
 			}
 		},
 
@@ -59,13 +55,11 @@
 			},
 			
 			saveClick(){
-				this.$api.post('zpapp/enterprise!ajaxResetPassword.action', {
+				this.$api.post('zpapp/enterprise!ajaxForgotPassword.action', {
 					tel: this.account,
 					phoneCode:this.code,
 					password:this.pwd,
 					repeatPassword:this.comfirmpwd
-					
-					
 				}).then(res => {
 					if (res.res.status == 0) {
 						uni.showToast({
@@ -250,5 +244,9 @@
 		font-size: 15px;
 		border-radius: 5px;
 		margin: 30px;
+		line-height: 40px;
+		height: 40px;
+		width: 80%;
+		text-align: center;
 	}
 </style>

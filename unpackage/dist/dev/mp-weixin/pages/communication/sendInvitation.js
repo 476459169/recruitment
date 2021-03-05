@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   lbPicker: function() {
-    return Promise.all(/*! import() | components/lb-picker/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/lb-picker/index")]).then(__webpack_require__.bind(null, /*! @/components/lb-picker/index.vue */ 152))
+    return Promise.all(/*! import() | components/lb-picker/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/lb-picker/index")]).then(__webpack_require__.bind(null, /*! @/components/lb-picker/index.vue */ 208))
   }
 }
 var render = function() {
@@ -232,21 +232,13 @@ var _default =
 
     handleConfirm1: function handleConfirm1(e) {
       this.defaultPlateContent = e.value.map(function (item) {return item;}).join('-');
-      for (var i = 0; i < e.item.length; i++) {
-        if (i == 0) {
-          console.log('classificationContent=' + e.item[i].id);
-          this.dataInf.defaultId = e.item[i].id;
+      for (var j = 0; j < this.dataInf.invitationCardArr.length; j++) {
+        var item = this.dataInf.invitationCardArr[j];
+        if (item.title === this.defaultPlateContent) {
+          this.dataInf.defaultId = item.id;
+          this.dataInf.defaultResponsibility = item.responsibility;
 
-          for (var j = 0; j < this.dataInf.invitationCardArr.length; j++) {
-            var item = this.dataInf.invitationCardArr[j];
-            if (item.id = this.dataInf.defaultId) {
-              this.dataInf.defaultResponsibility = item.responsibility;
-            }
-
-          }
-        } else {
-
-
+          console.log('classificationContent=' + item.id);
         }
       }
     },

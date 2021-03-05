@@ -237,6 +237,10 @@ var _default =
                 }, 1500);
               } });
 
+          } else {
+            uni.showToast({
+              title: res.res.errMsg });
+
           }
         });
       } else {

@@ -3,7 +3,11 @@
 		<view class="top_view">
 			<!-- <view class="top_img"></view> -->
 			<image class="top_view_img" :src="topPicStr.length>0?topPicStr:dataInf.headImgUrl?baseUrl+dataInf.headImgUrl:'../../static/login/addPic.png' "
-			 @click="topPictureClick()"></image>
+			 @click="topPictureClick()">
+
+				<image v-if="dataInf.isReview==1" class="isreview" src="../../static/mine/review.png" mode=""></image>
+			</image>
+
 		</view>
 
 		<view class="titleLabel">公司全称</view>
@@ -34,29 +38,41 @@
 
 		<view class="titleLabel"  >公司规模</view>
 		  <view class="company" @tap="handleTap('picker311')">
-		  	<view class="company_content">{{dataInf.selCompanyNatureContent}}</view>
-		  	<view class="company_imgView">
-				<image class="company_img" src="../../static/login/star3.png" mode=""></image>
-			</view>
-			
-		  </view>
-		<lb-picker ref="picker311" :props="myProps" mode="multiSelector" level='1' :list="dataInf.companyNatureArr" @confirm="handleConfirm2">
-		</lb-picker>
-		
-		
-		<view class="titleLabel"  >公司类型</view>
-		  <view class="company" @tap="handleTap('picker3111')">
 		  	<view class="company_content">{{dataInf.selScopeContent}}</view>
 		  	<view class="company_imgView">
 				<image class="company_img" src="../../static/login/star3.png" mode=""></image>
 			</view>
 			
 		  </view>
-		<lb-picker ref="picker3111" :props="myProps" mode="multiSelector" level='1' :list="dataInf.scopeArr" @confirm="handleConfirm1">
+		<lb-picker ref="picker311" :props="myProps" mode="multiSelector" level='1' :list="dataInf.scopeArr" @confirm="handleConfirm2">
 		</lb-picker>
+		
+		
+		<view class="titleLabel"  >公司类型</view>
+		  <view class="company" @tap="handleTap('picker3111')">
+		  	<view class="company_content">{{dataInf.selCompanyNatureContent}}</view>
+		  	<view class="company_imgView">
+				<image class="company_img" src="../../static/login/star3.png" mode=""></image>
+			</view>
+			
+		  </view>
+		<lb-picker ref="picker3111" :props="myProps" mode="multiSelector" level='1' :list="dataInf.companyNatureArr" @confirm="handleConfirm1">
+		</lb-picker>
+		
+		<view class="titleLabel">公司类别</view>
+		<view class="fl">
+			<view class="fl_item" v-for="(item,index) in dataInf.industryCategoryArr" :key="index" @click="flitemSelect(item)">
+				<view  :class="[item.isSelected ?'fl_item_btnSelected':'fl_item_btnNormal']">
+					
+				</view>
+				<view :class="[item.isSelected ?'fl_item_textSelected':'fl_item_textNormal']">
+					{{item.title}}
+				</view>
+			</view>
+		</view>
 
         <view class="titleLabel">公司简介</view>
-		<textarea class="address_detail_msg" value="" v-model="dataInf.intro"/>
+		<textarea class="detail_msg" maxlength="-1" value="" v-model="dataInf.intro"/>
 		
 		<view class="itemview">
 			<view class="itemview_title">证书照片</view>
@@ -84,14 +100,13 @@
 					children: 'child'
 				},
 				value2: [], //公司所在地
-				companyList:['1-50人','50-100人','100-500人','500人以上'],
-				companyScale:'1-50人',
 				list: areaData,
 				topPicStr:'',
 				location:[],
 				picStr:'',
 				baseUrl:'',
-				dataInf:Object
+				dataInf:Object,
+				selectIndustryCategoryArr:[]
 				
 			}
 	},
@@ -126,12 +141,23 @@
 				
 			},
 			
+			flitemSelect(item){
+				item.isSelected = !item.isSelected
+				// if(item.isSelected){
+				// 	this.selectIndustryCategoryArr.push(item.id)
+					
+				// }else{
+				// 	this.selectIndustryCategoryArr.splice(this.selectIndustryCategoryArr.indexOf(item.id),1)
+				// }
+			},
+			
+			
 			handleConfirm1(e){
-				this.dataInf.selScopeContent = e.value.map(item => item).join('-');
+				this.dataInf.selCompanyNatureContent = e.value.map(item => item).join('-');
 				for (var i = 0; i < e.item.length; i++) {
 					if (i == 0) {
-						console.log('selScopeId=' + e.item[i].id);
-						this.dataInf.selScopeId = e.item[i].id
+						console.log('selCompanyNatureId=' + e.item[i].id);
+						this.dataInf.selCompanyNatureId = e.item[i].id
 					} else {
 							
 							
@@ -140,11 +166,11 @@
 			},
 			
 			handleConfirm2(e){
-				this.dataInf.selCompanyNatureContent = e.value.map(item => item).join('-');
+				this.dataInf.selScopeContent = e.value.map(item => item).join('-');
 				for (var i = 0; i < e.item.length; i++) {
 					if (i == 0) {
-						console.log('selCompanyNatureId=' + e.item[i].id);
-						this.dataInf.selCompanyNatureId = e.item[i].id
+						console.log('selScopeId=' + e.item[i].id);
+						this.dataInf.selScopeId = e.item[i].id
 					} else {
 							
 							
@@ -180,9 +206,16 @@
 			},
 			
 			updata(){
-				
-				
 				console.log('location = '+this.dataInf.location);
+				
+				var selectIndustryArr = []
+				for (let i = 0; i < this.dataInf.industryCategoryArr.length; i++) {
+					var item = this.dataInf.industryCategoryArr[i]
+					if(item.isSelected){
+						selectIndustryArr.push(item.id)
+					}
+				}
+				console.log("arr= "+ selectIndustryArr);
 				var loginkey = uni.getStorageSync('loginKey');
 				if(this.picStr.length>0){
 					uni.uploadFile({
@@ -199,7 +232,9 @@
 						intro:this.dataInf.intro,
 						location:this.location.length>0?this.location.join('-'):this.dataInf.location.length>0?this.dataInf.location:'',
 						email:this.dataInf.email, 
-						selCompanyNatureId:this.dataInf.selCompanyNatureId 
+						industryCategoryArr:selectIndustryArr, 
+						selCompanyNatureId:this.dataInf.selCompanyNatureId,
+						
 					})
 						},
 						success: (uploadFileRes) => {
@@ -228,7 +263,8 @@
 										intro:this.dataInf.intro,
 										location:this.location.length>0?this.location.join('-'):this.dataInf.location.length>0?this.dataInf.location:'',
 										email:this.dataInf.email,
-										selCompanyNatureId:this.dataInf.selCompanyNatureId
+										selCompanyNatureId:this.dataInf.selCompanyNatureId,
+										industryCategoryArr:selectIndustryArr
 									})
 								}).then(res => {
 									if (res.res.status == 0) {
@@ -389,6 +425,16 @@
 		border-radius: 5px;
 	}
 	
+	.detail_msg{
+		margin: 0px 15px;
+		width: calc(100vw - 40px);
+		height:100px;
+		font-size: 14px;
+		background-color: #f5f7f8;
+		padding: 5px;
+		border-radius: 5px;
+	}
+	
 	
 	.phone_view{
 		display: flex;
@@ -487,6 +533,52 @@
 			height: auto;
 			border-radius: 5px;
 			background-color: #f5f7f8;
+		}
+	}
+	
+	.isreview{
+		position: relative;
+		right: 20px;
+		top: -10px;
+		width: 45px;
+		height: 45px;
+	}
+	
+	.fl{
+		display: flex;
+		flex-wrap:wrap;
+		.fl_item{
+			// width: 25%;
+			display: flex;
+			height: 25px;
+			margin-left: 10px;
+			// padding: 5px;
+			// background-color: #FF0000;
+			align-items: center;
+			// justify-content: center;
+			.fl_item_btnNormal{
+				width: 5px;
+				height: 5px;
+				border: 1px solid #333333;
+				margin-left: 10px;
+			}
+			.fl_item_btnSelected{
+				width: 5px;
+				height: 5px;
+				border: 1px solid #e8654b;
+				margin-left: 10px;
+			}
+			
+			.fl_item_textNormal{
+				font-size: 12px;
+				margin-left: 3px;
+				color: #333333;
+			}
+			.fl_item_textSelected{
+				font-size: 12px;
+				margin-left: 3px;
+				color: #e8654b;
+			}
 		}
 	}
 	

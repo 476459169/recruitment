@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components = {
   lbPicker: function() {
-    return Promise.all(/*! import() | components/lb-picker/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/lb-picker/index")]).then(__webpack_require__.bind(null, /*! @/components/lb-picker/index.vue */ 152))
+    return Promise.all(/*! import() | components/lb-picker/index */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/lb-picker/index")]).then(__webpack_require__.bind(null, /*! @/components/lb-picker/index.vue */ 208))
   }
 }
 var render = function() {
@@ -144,6 +144,22 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -292,21 +308,31 @@ var _areaDataMin = _interopRequireDefault(__webpack_require__(/*! ../login/area-
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _this;var _default = { data: function data() {return { myProps: { label: 'content', value: 'id', children: 'child' }, value2: [], //公司所在地
-      companyList: ['1-50人', '50-100人', '100-500人', '500人以上'], companyScale: '1-50人', list: _areaDataMin.default, topPicStr: '', location: [], picStr: '', baseUrl: '', dataInf: Object };}, onLoad: function onLoad() {_this = this;this.baseUrl = getApp().globalData.baseUrl;this.getData();}, methods: { getData: function getData() {var _this2 = this;var loginkey = uni.getStorageSync('loginKey');if (loginkey) {this.$api.post('zpapp/enterprise!ajaxGetEnterpriseInfo.action', { loginKey: loginkey }).then(function (res) {if (res.res.status == 0) {_this2.dataInf = res.inf;} else {}});} else {}}, handleConfirm1: function handleConfirm1(e) {this.dataInf.selScopeContent = e.value.map(function (item) {return item;}).join('-');for (var i = 0; i < e.item.length; i++) {if (i == 0) {console.log('selScopeId=' + e.item[i].id);this.dataInf.selScopeId = e.item[i].id;} else {}}}, handleConfirm2: function handleConfirm2(e) {this.dataInf.selCompanyNatureContent = e.value.map(function (item) {return item;}).join('-');for (var i = 0; i < e.item.length; i++) {if (i == 0) {console.log('selCompanyNatureId=' + e.item[i].id);this.dataInf.selCompanyNatureId = e.item[i].id;} else {}
-      }
-    },
-    handleTap: function handleTap(picker) {
-      this.$refs[picker].show();
-      // console.log("handleTap");
-    },
-    handleChange: function handleChange(item) {
-      // console.log('change::', item)
-    },
-
-    okClick: function okClick() {
-      var loginkey = uni.getStorageSync('loginKey');
-      if (this.topPicStr.length > 0) {
+      list: _areaDataMin.default, topPicStr: '', location: [], picStr: '', baseUrl: '', dataInf: Object, selectIndustryCategoryArr: [] };}, onLoad: function onLoad() {_this = this;this.baseUrl = getApp().globalData.baseUrl;this.getData();}, methods: { getData: function getData() {var _this2 = this;var loginkey = uni.getStorageSync('loginKey');if (loginkey) {this.$api.post('zpapp/enterprise!ajaxGetEnterpriseInfo.action', { loginKey: loginkey }).then(function (res) {if (res.res.status == 0) {_this2.dataInf = res.inf;} else {}});} else {}}, flitemSelect: function flitemSelect(item) {item.isSelected = !item.isSelected; // if(item.isSelected){
+      // 	this.selectIndustryCategoryArr.push(item.id)
+      // }else{
+      // 	this.selectIndustryCategoryArr.splice(this.selectIndustryCategoryArr.indexOf(item.id),1)
+      // }
+    }, handleConfirm1: function handleConfirm1(e) {this.dataInf.selCompanyNatureContent = e.value.map(function (item) {return item;}).join('-');for (var i = 0; i < e.item.length; i++) {if (i == 0) {console.log('selCompanyNatureId=' + e.item[i].id);this.dataInf.selCompanyNatureId = e.item[i].id;} else {}}}, handleConfirm2: function handleConfirm2(e) {this.dataInf.selScopeContent = e.value.map(function (item) {return item;}).join('-');for (var i = 0; i < e.item.length; i++) {if (i == 0) {console.log('selScopeId=' + e.item[i].id);this.dataInf.selScopeId = e.item[i].id;} else {}}}, handleTap: function handleTap(picker) {this.$refs[picker].show(); // console.log("handleTap");
+    }, handleChange: function handleChange(item) {// console.log('change::', item)
+    }, okClick: function okClick() {var loginkey = uni.getStorageSync('loginKey');if (this.topPicStr.length > 0) {
         uni.uploadFile({
           url: this.baseUrl + 'zpapp/enterprise!ajaxUpdateEnterpriseHeadImg.action', //仅为示例，非真实的接口地址
           filePath: _this.topPicStr ? _this.topPicStr : _this.dataInf.headImgUrl ? _this.baseUrl + _this.dataInf.headImgUrl : '../../static/login/addPic.png',
@@ -325,9 +351,16 @@ var _this;var _default = { data: function data() {return { myProps: { label: 'co
     },
 
     updata: function updata() {
-
-
       console.log('location = ' + this.dataInf.location);
+
+      var selectIndustryArr = [];
+      for (var i = 0; i < this.dataInf.industryCategoryArr.length; i++) {
+        var item = this.dataInf.industryCategoryArr[i];
+        if (item.isSelected) {
+          selectIndustryArr.push(item.id);
+        }
+      }
+      console.log("arr= " + selectIndustryArr);
       var loginkey = uni.getStorageSync('loginKey');
       if (this.picStr.length > 0) {
         uni.uploadFile({
@@ -344,7 +377,9 @@ var _this;var _default = { data: function data() {return { myProps: { label: 'co
               intro: this.dataInf.intro,
               location: this.location.length > 0 ? this.location.join('-') : this.dataInf.location.length > 0 ? this.dataInf.location : '',
               email: this.dataInf.email,
+              industryCategoryArr: selectIndustryArr,
               selCompanyNatureId: this.dataInf.selCompanyNatureId }) },
+
 
 
           success: function success(uploadFileRes) {
@@ -373,7 +408,8 @@ var _this;var _default = { data: function data() {return { myProps: { label: 'co
               intro: this.dataInf.intro,
               location: this.location.length > 0 ? this.location.join('-') : this.dataInf.location.length > 0 ? this.dataInf.location : '',
               email: this.dataInf.email,
-              selCompanyNatureId: this.dataInf.selCompanyNatureId }) }).
+              selCompanyNatureId: this.dataInf.selCompanyNatureId,
+              industryCategoryArr: selectIndustryArr }) }).
 
           then(function (res) {
             if (res.res.status == 0) {

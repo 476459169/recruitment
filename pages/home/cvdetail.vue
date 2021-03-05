@@ -7,7 +7,7 @@
 						<view class="top_view_t_leftview_titleview_title">
 							{{dataInf.userInfo.realName}}
 						</view>
-						<image class="top_view_t_leftview_titleview_img" :src="dataInf.userInfo.sex===1?'../../static/home/man.png':'../../static/home/woman.png'"
+						<image class="top_view_t_leftview_titleview_img" :src="dataInf.userInfo.sex===1?'../../static/home/woman.png':'../../static/home/man.png'"
 						 mode=""></image>
 						<view class="top_view_t_leftview_titleview_mes">
 							随时到岗
@@ -20,9 +20,7 @@
 						{{dataInf.userInfo.hukouLocation}}
 					</view>
 				</view>
-				<view class="top_view_t_rightview">
-
-				</view>
+				<image class="top_view_t_rightview" :src="[dataInf.userInfo.headImgUrl.length>0?baseUrl+dataInf.userInfo.headImgUrl:'']" mode=""></image>
 			</view>
 
 			<view class="top_view_b">
@@ -121,7 +119,7 @@
 				自我评价
 			</view>
 			<view class="work_experience_item">
-				<view class="work_experience_item_content_blackText" style="margin-left: 10px;">
+				<view class="work_experience_item_content_blackText" style="margin-left: 10px; font-size: 12px; color: #666666;">
 					{{dataInf.selfEvaluation}}
 				</view>
 			</view>
@@ -131,7 +129,7 @@
 		<!-- <button class="bottom_btn" type="default">立即沟通</button>
 		 -->
 		<view class="bottom_btns">
-			<view class="bottom_btns_btn" @click="notOk()">
+			<view class="bottom_btns_btn" v-if="type=== null" @click="notOk()">
 				不合适
 			</view>
 			<view class="bottom_btns_btn" @click="invitation()">
@@ -197,32 +195,58 @@
 				dataInf: Object,
 				resumeId: '',
 				boolShow: false,
-				userInf:Object
+				userInf:Object,
+				type:null,
+				baseUrl:''
 			}
 		},
 		onLoad(e) {
 			this.id = e.id
 			this.resumeId = e.resumeId
+			this.baseUrl = getApp().globalData.baseUrl
+			if(e.type){
+				this.type = e.type
+			}
 			this.getData()
 		},
 		methods: {
 			getData() {
-
+				
 				let loginkey = uni.getStorageSync('loginKey')
-				this.$api.post('zpapp/zpResume!ajaxGetDeliveryResumeDetail.action', {
-					loginKey: loginkey,
-					id: this.id,
-					resumeId: this.resumeId
-				}).then(res => {
-					if (res.res.status == 0) {
-						this.dataInf = res.inf
-					} else {
-						uni.showToast({
-							title: res.res.errMsg,
-						})
-					}
-
-				})
+					
+				if(this.type){
+					this.$api.post('zpapp/zpResume!ajaxGetResumeDetail.action', {
+						loginKey: loginkey,
+						resumeId: this.resumeId
+					}).then(res => {
+						if (res.res.status == 0) {
+							this.dataInf = res.inf
+						} else {
+							uni.showToast({
+								title: res.res.errMsg,
+							})
+						}
+					
+					})
+				}else{
+					this.$api.post('zpapp/zpResume!ajaxGetDeliveryResumeDetail.action', {
+						loginKey: loginkey,
+						id: this.id,
+						resumeId: this.resumeId
+					}).then(res => {
+						if (res.res.status == 0) {
+							this.dataInf = res.inf
+						} else {
+							uni.showToast({
+								title: res.res.errMsg,
+							})
+						}
+					
+					})
+				}
+				
+				
+			
 			},
 			notOk() {
 				let loginkey = uni.getStorageSync('loginKey')
@@ -244,9 +268,17 @@
 			},
 
 			invitation() {
-				uni.navigateTo({
-					url: '../communication/sendInvitation?id=' + this.id + '&resumeId=' + this.resumeId
-				})
+				
+				if(this.type){
+					uni.navigateTo({
+						url: './matchingPosition?id='+this.resumeId
+					})
+				}else{
+					uni.navigateTo({
+						url: '../communication/sendInvitation?id=' + this.id + '&resumeId=' + this.resumeId
+					})
+				}
+				
 			},
 			callme() {
 				let loginkey = uni.getStorageSync('loginKey')

@@ -61,7 +61,8 @@
 				zwf: "\u0020",
 				btnArr: ['简历', '下架', '删除', '复制', '修改', '置顶', '刷新'],
 				xjBtnArr: ['简历', '上架', '删除', '复制', '修改', '置顶', '刷新'],
-				dataList: []
+				dataList: [],
+				userInfo:Object
 			};
 		},
 
@@ -71,9 +72,25 @@
 
 		onShow() {
 			this.getData()
+			this.getUserInfo()
 		},
 
 		methods: {
+			
+			getUserInfo() {
+				var loginkey = uni.getStorageSync('loginKey');
+				this.$api.post('zpapp/enterprise!ajaxGetEnterpriseBaseInfo.action', {
+					loginKey: loginkey
+			
+				}).then(res => {
+					if (res.res.status == 0) {
+						this.userInfo = res.inf
+					} else {
+						this.logout()
+					}
+				})
+			},
+			
 			getData() {
 				var loginkey = uni.getStorageSync('loginKey')
 				this.$api.post('zpapp/position!ajaxGetPositionList.action', {
@@ -193,13 +210,20 @@
 
 			},
 			releaseposition() {
-				var loginKey = uni.getStorageSync('loginKey')
-				if (loginKey.length > 0) {
-
-					uni.navigateTo({
-						url: '../home/openPositions'
+				if(this.userInfo.isReview === 1){
+					var loginKey = uni.getStorageSync('loginKey')
+					if (loginKey.length > 0) {
+					
+						uni.navigateTo({
+							url: '../home/openPositions'
+						})
+					}
+				}else{
+					uni.showToast({
+						title:'企业认证后\r\n才可以发布职位！'
 					})
 				}
+				
 			}
 
 
@@ -327,5 +351,6 @@
 		line-height: 20px;
 		text-align: center;
 		padding: 4px;
+		box-shadow:3px 3px 3px #888888 ;
 	}
 </style>

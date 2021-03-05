@@ -42,6 +42,7 @@
   -webkit-box-align: center;
   -webkit-align-items: center;
           align-items: center;
+  overflow: hidden;
 }
 .user_view .user_view_img {
   margin: 20px;
@@ -49,6 +50,13 @@
   height: 60px;
   -webkit-border-radius: 30px;
           border-radius: 30px;
+}
+.user_view .user_view_review {
+  position: relative;
+  right: -5px;
+  top: -35px;
+  width: 55px;
+  height: 55px;
 }
 .user_view .user_view_contentview {
   -webkit-box-flex: 1;
@@ -66,7 +74,7 @@
           justify-content: center;
 }
 .user_view .user_view_contentview .user_view_contentview_title {
-  font-size: 16px;
+  font-size: 15px;
   color: #000000;
   line-height: 25px;
 }

@@ -208,6 +208,9 @@ var _default =
 
 
         } else {
+          uni.showToast({
+            title: res.res.errMsg });
+
 
         }
       });

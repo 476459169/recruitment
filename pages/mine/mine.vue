@@ -12,15 +12,15 @@
 					</view>
 				</view> -->
 			</view>
-			<!-- <image class="endImg" src="../../static/mine/endImg.png" mode=""></image> -->
+			<image v-if="userInfo.isReview==1" class="user_view_review" src="../../static/mine/review.png" mode=""></image>
 		</view>
 
-		<view class="flex_item" @click="vipCenter()">
+		<!-- <view class="flex_item" @click="vipCenter()">
 			<image class="flex_item_img" src="../../static/mine/hyzx.png" mode=""></image>
 			<view class="flex_item_content">会员中心</view>
 			<image class="endImg" src="../../static/mine/endImg.png" mode=""></image>
 		</view>
-		<view class="line"></view>
+		<view class="line"></view> -->
 
 		<view class="flex_item" @click="invitation()">
 			<image class="flex_item_img" src="../../static/mine/yqh.png" mode=""></image>
@@ -29,20 +29,20 @@
 		</view>
 		<view class="line"></view>
 
-
+<!-- 
 		<view class="flex_item" @click="manageJob()">
 			<image class="flex_item_img" src="../../static/mine/ddjl.png" mode=""></image>
 			<view class="flex_item_content">订单记录</view>
 			<image class="endImg" src="../../static/mine/endImg.png" mode=""></image>
 		</view>
-		<view class="line"></view>
-
-		<view class="flex_item" @click="manageJob()">
+		<view class="line"></view> -->
+<!-- 
+		<view class="flex_item" @click="invoice()">
 			<image class="flex_item_img" src="../../static/mine/wdfp.png" mode=""></image>
 			<view class="flex_item_content">我的发票</view>
 			<image class="endImg" src="../../static/mine/endImg.png" mode=""></image>
 		</view>
-		<view class="line"></view>
+		<view class="line"></view> -->
 
 		<view class="flex_item" @click="mangeCv()">
 			<image class="flex_item_img" src="../../static/mine/xxjx.png" mode=""></image>
@@ -52,7 +52,7 @@
 		<view class="line"></view>
 
 
-		<view class="flex_item">
+		<view class="flex_item" @click="changePwd()">
 			<image class="flex_item_img" src="../../static/mine/xgmm.png" mode=""></image>
 			<view class="flex_item_content">修改密码</view>
 			<image class="endImg" src="../../static/mine/endImg.png" mode=""></image>
@@ -113,9 +113,21 @@
 				})
 			},
 			
+			invoice(){
+				uni.navigateTo({
+					url:'./invoice/invoice'
+				})
+			},
+			
 			vipCenter(){
 				uni.navigateTo({
 					url:'./vipCenter'
+				})
+			},
+			
+			changePwd(){
+				uni.navigateTo({
+					url:'./changePwd'
 				})
 			},
 
@@ -153,7 +165,8 @@
 				uni.removeStorageSync('loginKey');
 				uni.removeStorageSync('userId');
 				uni.removeStorageSync('isFill');
-				this.userInfo = Object;
+				this.userInfo = null;
+				
 			}
 		}
 
@@ -174,13 +187,21 @@
 		background-color: #FFFFFF;
 		display: flex;
 		align-items: center;
-
+		overflow: hidden;
 		.user_view_img {
 			margin: 20px;
 			width: 60px;
 			height: 60px;
 			border-radius: 30px;
 			// background-color: #e8654b;
+		}
+		
+		.user_view_review{
+			position: relative;
+			right: -5px;
+			top: -35px;
+			width: 55px;
+			height: 55px;
 		}
 
 		.user_view_contentview {
@@ -190,7 +211,7 @@
 			justify-content: center;
 
 			.user_view_contentview_title {
-				font-size: 16px;
+				font-size: 15px;
 				color: #000000;
 				line-height: 25px;
 			}

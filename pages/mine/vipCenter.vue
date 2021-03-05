@@ -1,7 +1,8 @@
 <template>
 	<view>
 		<view class="topView">
-			<view class="topView_img"></view>
+			<!-- <view class="topView_img"></view>-->
+			<image class="topView_img" :src="dataInf.headImgUrl.length>0?baseUrl+dataInf.headImgUrl:''" mode=""></image>
 			<view class="topView_centent">
 				<view class="topView_centent_nameView">
 					<view class="topView_centent_nameView_name">
@@ -111,12 +112,15 @@
 				vipArr:[1,2,3,4,5,6],
 				cvArr:[1,2,3],
 				zdArr:[1,2,3],
-				dataInf:Object
+				dataInf:Object,
+				baseUrl:''
 			};
 		},
 		
 		onLoad() {
+			this.baseUrl = getApp().globalData.baseUrl
 			this.getData()
+			
 		},
 		
 		methods:{
@@ -162,7 +166,6 @@
 			margin:0px 15px;
 			width: 50px;
 			height: 50px;
-			background-color: #000000;
 			border-radius: 25px;
 		}
 		

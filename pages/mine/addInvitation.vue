@@ -3,10 +3,10 @@
 		<!-- <input class="uni-input" cursor-spacing="0"/> -->
 
 		<view class="titleLabel">邀请函名称</view>
-		<input class="uni-input input_text" cursor-spacing="0" type="text" value="" v-model="dataInf.title" />
+		<input class="uni-input input_text" maxlength="-1" cursor-spacing="0" type="text" value="" v-model="dataInf.title" />
 
 		<view class="titleLabel">工作职责</view>
-		<textarea class="uni-input address_detail_msg" cursor-spacing="0" value="" v-model="dataInf.responsibility" />
+		<textarea class="uni-input address_detail_msg" maxlength="-1" cursor-spacing="0" value="" v-model="dataInf.responsibility" />
 
 
 		<view class="bottom_view">

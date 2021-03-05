@@ -245,9 +245,21 @@ var _default =
 
     },
 
+    invoice: function invoice() {
+      uni.navigateTo({
+        url: './invoice/invoice' });
+
+    },
+
     vipCenter: function vipCenter() {
       uni.navigateTo({
         url: './vipCenter' });
+
+    },
+
+    changePwd: function changePwd() {
+      uni.navigateTo({
+        url: './changePwd' });
 
     },
 
@@ -285,7 +297,8 @@ var _default =
       uni.removeStorageSync('loginKey');
       uni.removeStorageSync('userId');
       uni.removeStorageSync('isFill');
-      this.userInfo = Object;
+      this.userInfo = null;
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

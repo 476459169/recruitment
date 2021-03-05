@@ -67,16 +67,19 @@
 					if (res.res.status == 0) {
 						// this.sfz = res.inf.subCardNo
 						uni.showToast({
-							title:'注册成功',
+							title: '注册成功',
 							success() {
 								uni.navigateBack({
-									
+
 								})
 							}
 						})
 
 					} else {
+						uni.showToast({
+							title: res.res.errMsg,
 
+						})
 					}
 				})
 

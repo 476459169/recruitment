@@ -266,7 +266,7 @@
 			
 			okClick(e){
 					var loginkey = uni.getStorageSync('loginKey');
-					if(this.dataInf.location.length>0){
+					if(this.dataInf.location.length === 3){
 						this.dataInf.location = this.dataInf.location.join('-')
 					}
 					

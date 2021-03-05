@@ -195,15 +195,9 @@ var _areaDataMin = _interopRequireDefault(__webpack_require__(/*! ./area-data-mi
 //
 //
 //
-var _default = { data: function data() {return { account: '', pwd: '', comfirmpwd: '', phoneNumber: '', code: '', value2: [], //公司所在地
-      companyList: ['1-50人', '50-100人', '100-500人', '500人以上'], companyScale: '1-50人', list: _areaDataMin.default };}, methods: { handleTap: function handleTap(picker) {this.$refs[picker].show(); // console.log("handleTap");
+var _default = { data: function data() {return { account: '', pwd: '', comfirmpwd: '', phoneNumber: '', code: '' };}, methods: { handleTap: function handleTap(picker) {this.$refs[picker].show(); // console.log("handleTap");
     }, handleChange: function handleChange(item) {// console.log('change::', item)
-    }, saveClick: function saveClick() {this.$api.post('zpapp/enterprise!ajaxResetPassword.action', { tel: this.account, phoneCode: this.code, password: this.pwd, repeatPassword: this.comfirmpwd }).then(function (res) {
-        if (res.res.status == 0) {
-          uni.showToast({
-            title: '修改成功',
-            success: function success() {
-              uni.navigateBack({});
+    }, saveClick: function saveClick() {this.$api.post('zpapp/enterprise!ajaxForgotPassword.action', { tel: this.account, phoneCode: this.code, password: this.pwd, repeatPassword: this.comfirmpwd }).then(function (res) {if (res.res.status == 0) {uni.showToast({ title: '修改成功', success: function success() {uni.navigateBack({});
 
 
             } });

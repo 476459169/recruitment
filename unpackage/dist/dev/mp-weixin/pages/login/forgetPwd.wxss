@@ -201,5 +201,9 @@
   -webkit-border-radius: 5px;
           border-radius: 5px;
   margin: 30px;
+  line-height: 40px;
+  height: 40px;
+  width: 80%;
+  text-align: center;
 }
 

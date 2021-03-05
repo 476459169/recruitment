@@ -193,7 +193,8 @@ var _this;var _default =
       zwf: " ",
       btnArr: ['简历', '下架', '删除', '复制', '修改', '置顶', '刷新'],
       xjBtnArr: ['简历', '上架', '删除', '复制', '修改', '置顶', '刷新'],
-      dataList: [] };
+      dataList: [],
+      userInfo: Object };
 
   },
 
@@ -203,16 +204,32 @@ var _this;var _default =
 
   onShow: function onShow() {
     this.getData();
+    this.getUserInfo();
   },
 
   methods: {
-    getData: function getData() {var _this2 = this;
+
+    getUserInfo: function getUserInfo() {var _this2 = this;
+      var loginkey = uni.getStorageSync('loginKey');
+      this.$api.post('zpapp/enterprise!ajaxGetEnterpriseBaseInfo.action', {
+        loginKey: loginkey }).
+
+      then(function (res) {
+        if (res.res.status == 0) {
+          _this2.userInfo = res.inf;
+        } else {
+          _this2.logout();
+        }
+      });
+    },
+
+    getData: function getData() {var _this3 = this;
       var loginkey = uni.getStorageSync('loginKey');
       this.$api.post('zpapp/position!ajaxGetPositionList.action', {
         loginKey: loginkey }).
       then(function (res) {
         if (res.res.status == 0) {
-          _this2.dataList = res.inf.arr;
+          _this3.dataList = res.inf.arr;
         } else {
           uni.showToast({
             title: res.res.errMsg });
@@ -222,7 +239,7 @@ var _this;var _default =
       });
     },
 
-    btnClick: function btnClick(item, index) {var _this3 = this;
+    btnClick: function btnClick(item, index) {var _this4 = this;
       console.log("item.id  = " + item.id);
       if (index === 0) {
         //简历
@@ -288,7 +305,7 @@ var _this;var _default =
           id: item.id }).
         then(function (res) {
           if (res.res.status == 0) {
-            _this3.getData();
+            _this4.getData();
           } else {
             uni.showToast({
               title: res.res.errMsg });
@@ -325,13 +342,20 @@ var _this;var _default =
 
     },
     releaseposition: function releaseposition() {
-      var loginKey = uni.getStorageSync('loginKey');
-      if (loginKey.length > 0) {
+      if (this.userInfo.isReview === 1) {
+        var loginKey = uni.getStorageSync('loginKey');
+        if (loginKey.length > 0) {
 
-        uni.navigateTo({
-          url: '../home/openPositions' });
+          uni.navigateTo({
+            url: '../home/openPositions' });
+
+        }
+      } else {
+        uni.showToast({
+          title: '企业认证后\r\n才可以发布职位！' });
 
       }
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

@@ -313,7 +313,7 @@ var timer = null;var _default =
 
     itemClick: function itemClick(item) {
       uni.navigateTo({
-        url: './cvdetail' });
+        url: './cvdetail?resumeId=' + item.id + '&type=' + 'home' });
 
     },
     //获取节点距离顶部的距离
